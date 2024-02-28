@@ -5,17 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Project</title>
     <link rel="stylesheet" href="./css/styles.css" />
-    <script src="./js/script.js" defer></script>
   </head>
   <body>
     <div class="container">
-      <table id="table">
-        <caption>
-          My Library
-        </caption>
-        <tbody>
-        </tbody>
-      </table>
+      <div class="main-content">
+        <table id="table">
+          <caption>
+            My Library
+          </caption>
+          <tbody></tbody>
+        </table>
+        <button id="addBook">Add a Book to My Library</button>
+      </div>
+      <div class="sidebar">
+        <div class="inputs">
+        <label for="title">Book Title:</label>
+        <input id="title" name="title" type="text">
+        <label for="author">Book Author:</label>
+        <input id="author" name="author" type="text">
+        <label for="pages">Number of Pages:</label>
+        <input id="pages" name="pages" type="number">
+        <label for="read">Have you read this book?</label>
+        <input id="read" name="read" type="text">
+      </div>
+        <button id="submitBook">Add Book</button>
+      </div>
     </div>
+    <script src="./js/script.js"></script>
   </body>
 </html>
