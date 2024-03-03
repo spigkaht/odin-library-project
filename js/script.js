@@ -88,6 +88,33 @@ addBookToLibrary = (book) => {
   myLibrary.push(book);
 };
 
+// delete and change status buttons > event listeners for each object in array
+actionButtonLoad = () => {
+  const actionBtns = document.querySelectorAll(".action");
+
+  actionBtns.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      const index =
+        e.target.parentElement.parentElement.attributes["data-index"].value;
+
+      // if value of button clicked is.. delete > run delete, read-toggle > run toggle
+      if (el.classList.contains("delete")) {
+        myLibrary.splice(index, 1);
+        tableEl.innerHTML = "";
+        displayLibrary(myLibrary);
+      } else if (el.classList.contains("read-toggle")) {
+        bool = myLibrary[index].read;
+        bool === true
+          ? (myLibrary[index].read = false)
+          : (myLibrary[index] = true);
+        tableEl.innerHTML = "";
+        displayLibrary(myLibrary);
+      } else console.log("error");
+      console.log("deleted");
+    });
+  });
+};
+
 // output myLibrary to screen using HTML table
 displayLibrary = (library) => {
   clearTable();
@@ -100,11 +127,12 @@ displayLibrary = (library) => {
         <td>${el.author}</td>
         <td>${el.pages}</td>
         <td>${el.read ? "Yes" : "No"}</td>
-        <td><button class="delete">Delete</button></td>
-        <td><button class="read-toggle">Read</button></td>
+        <td><button class="action delete">Delete</button></td>
+        <td><button class="action read-toggle">Read</button></td>
       </tr>
     `;
   });
+  const actionBtns = document.querySelectorAll(".action");
 };
 
 // functions to run when main button is clicked
@@ -130,3 +158,8 @@ windowLoaded = () => {
 window.addEventListener("load", windowLoaded);
 mainBtn.addEventListener("click", mainBtnClicked);
 sidebarBtn.addEventListener("click", sidebarBtnClicked);
+document.body.addEventListener("click", (e) => {
+  if (e.target.classList.contains("action")) {
+    actionButtonLoad();
+  }
+});
