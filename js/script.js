@@ -89,30 +89,24 @@ addBookToLibrary = (book) => {
 };
 
 // delete and change status buttons > event listeners for each object in array
-actionButtonLoad = () => {
-  const actionBtns = document.querySelectorAll(".action");
+actionButtonLoad = (event) => {
+  const index =
+    event.target.parentElement.parentElement.attributes["data-index"].value;
 
-  actionBtns.forEach((el) => {
-    el.addEventListener("click", (e) => {
-      const index =
-        e.target.parentElement.parentElement.attributes["data-index"].value;
-
-      // if value of button clicked is.. delete > run delete, read-toggle > run toggle
-      if (el.classList.contains("delete")) {
-        myLibrary.splice(index, 1);
-        tableEl.innerHTML = "";
-        displayLibrary(myLibrary);
-      } else if (el.classList.contains("read-toggle")) {
-        bool = myLibrary[index].read;
-        bool === true
-          ? (myLibrary[index].read = false)
-          : (myLibrary[index] = true);
-        tableEl.innerHTML = "";
-        displayLibrary(myLibrary);
-      } else console.log("error");
-      console.log("deleted");
-    });
-  });
+  // if value of button clicked is.. delete > run delete, read-toggle > run toggle
+  if (event.target.classList.contains("delete")) {
+    myLibrary.splice(index, 1);
+    tableEl.innerHTML = "";
+    displayLibrary(myLibrary);
+  } else if (event.target.classList.contains("read-toggle")) {
+    myLibrary[index].read === true
+      ? (myLibrary[index].read = false)
+      : (myLibrary[index].read = true);
+    console.log(myLibrary.read);
+    tableEl.innerHTML = "";
+    displayLibrary(myLibrary);
+  } else console.log("error");
+  console.log(myLibrary);
 };
 
 // output myLibrary to screen using HTML table
@@ -158,8 +152,9 @@ windowLoaded = () => {
 window.addEventListener("load", windowLoaded);
 mainBtn.addEventListener("click", mainBtnClicked);
 sidebarBtn.addEventListener("click", sidebarBtnClicked);
+
 document.body.addEventListener("click", (e) => {
   if (e.target.classList.contains("action")) {
-    actionButtonLoad();
+    actionButtonLoad(e);
   }
 });
