@@ -27,13 +27,15 @@ const myLibrary = [
   },
 ];
 
-// Book constructor, to create new book objects
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
+// book class, for creation of new book objects
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+  info() {
     let isRead = "";
     this.read ? (isRead = "has been read") : (isRead = "not read yet");
     return (
@@ -45,8 +47,29 @@ function Book(title, author, pages, read) {
       " pages, " +
       isRead
     );
-  };
+  }
 }
+
+// Book constructor, to create new book objects
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+//   this.info = function () {
+//     let isRead = "";
+//     this.read ? (isRead = "has been read") : (isRead = "not read yet");
+//     return (
+//       this.title +
+//       " by " +
+//       this.author +
+//       ", " +
+//       this.pages +
+//       " pages, " +
+//       isRead
+//     );
+//   };
+// }
 
 // hide sidebar when book is added to library
 hideSidebar = () => {
